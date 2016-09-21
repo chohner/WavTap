@@ -14,10 +14,7 @@ Capture whatever your mac is playing to a .wav file on your Desktop—as simply 
 
 1. Reboot the Mac and hold down Command + R keys simultaneously after you hear the startup chime, this will boot OS X into Recovery Mode
 2. When the “OS X Utilities” screen appears, pull down the ‘Utilities’ menu at the top of the screen instead, and choose “Terminal”
-3. Type the following command into the terminal then hit return:
-```shell
-csrutil disable; reboot
-```
+3. Type the following command into the terminal then hit return:`csrutil disable; reboot`
 4. You’ll see a message saying that System Integrity Protection has been disabled and the Mac needs to restart for changes to take effect, and the Mac will then reboot itself automatically, just let it boot up as normal
 
 
