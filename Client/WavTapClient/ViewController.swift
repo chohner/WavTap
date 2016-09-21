@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 import CocoaAsyncSocket
 import SwiftyUserDefaults
 
@@ -44,13 +43,6 @@ class ViewController: UIViewController
         
         mHostTextField.text = Defaults[.HostKey]
         mPortTextField.text = Defaults.hasKey(.PortKey) ? Defaults[.PortKey] : "32905"
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error)
-        }
     }
 
     override func didReceiveMemoryWarning()

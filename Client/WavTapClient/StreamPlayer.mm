@@ -8,13 +8,20 @@
 
 #import "StreamPlayer.h"
 
+#import "CARingBuffer.h"
+#import "CABitOperations.h"
+
 @interface StreamPlayer()
 {
+    AudioUnit _audioUnit;
+    AudioTimeStamp _workTimeStamp;
+    AudioBuffer _workBuf;
+    
     BOOL _isPlaying;
 }
-@property (nonatomic) AudioUnit audioUnit;
-@property (nonatomic) AudioTimeStamp workTimeStamp;
-@property (nonatomic) AudioBuffer workBuf;
+@property (nonatomic) CARingBuffer *histBuf;
+@property (nonatomic) UInt32 histBufMaxByteSize;
+@property (nonatomic) UInt32 histBufFrameNumber;
 @property (readwrite) NSUInteger packetSize;
 
 @end
@@ -28,7 +35,7 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 {
     StreamPlayer *self = (__bridge StreamPlayer*)inRefCon;
     
-    ioData->mBuffers[0] = self.workBuf;
+    self.histBuf->Fetch(ioData, inNumberFrames, self.histBufFrameNumber - inNumberFrames);
 
     return noErr;
 }
@@ -48,6 +55,14 @@ static OSStatus OutputRenderCallback (void *inRefCon,
     
     _workBuf.mDataByteSize = outputFormat.mBytesPerFrame * 1024;
     _workBuf.mData = malloc(_workBuf.mDataByteSize);
+    _workBuf.mNumberChannels = outputFormat.mChannelsPerFrame;
+    
+    UInt32 framesInHistoryBuffer = NextPowerOfTwo(outputFormat.mSampleRate * 10);
+    
+    _histBuf = new CARingBuffer();
+    _histBuf->Allocate(2, outputFormat.mBytesPerFrame, framesInHistoryBuffer);
+    _histBufMaxByteSize = outputFormat.mBytesPerFrame * framesInHistoryBuffer;
+    _histBufFrameNumber = 0;
     
     // create a component description
     AudioComponentDescription desc;
@@ -76,10 +91,21 @@ static OSStatus OutputRenderCallback (void *inRefCon,
     CheckError(AudioUnitSetProperty(_audioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &callbackStruct, sizeof(callbackStruct)),
                "AudioUnitSetProperty SetRenderCallback Failed");
     
+    UInt32 maxFPS = 4096;
+    CheckError(AudioUnitSetProperty(_audioUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maxFPS, sizeof(maxFPS)),
+               "AudioUnitSetProperty MaximumFramesPerSlice Failed");
+    
     // initialize the unit
     CheckError(AudioUnitInitialize(_audioUnit), "AudioUnitInitializeFailed");
     
     return self;
+}
+
+- (void)dealloc
+{
+    _histBuf->Deallocate();
+    
+    delete _histBuf;
 }
 
 - (BOOL)isStreaming
@@ -104,6 +130,15 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 - (void)play:(NSData *)data
 {
     memcpy(_workBuf.mData, [data bytes], [data length]);
+
+    AudioBufferList abl;
+    abl.mBuffers[0] = _workBuf;
+    abl.mNumberBuffers = 1;
+    
+    _histBuf->Store(&abl, (_workBuf.mDataByteSize / _workBuf.mNumberChannels) / sizeof(UInt32), _histBufFrameNumber);
+    
+    UInt32 frameSize = sizeof(UInt32) * _workBuf.mNumberChannels;
+    _histBufFrameNumber = ((_histBufFrameNumber + (_workBuf.mDataByteSize / frameSize)) % (_histBufMaxByteSize / frameSize));
 }
 
 void CheckError(OSStatus error, const char *operation)
