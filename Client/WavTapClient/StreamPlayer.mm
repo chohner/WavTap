@@ -13,21 +13,21 @@
 
 @interface StreamPlayer()
 {
-    AudioUnit _audioUnit;
-    AudioTimeStamp _workTimeStamp;
-    AudioBuffer _workBuf;
-    
     BOOL _isPlaying;
 }
+@property (nonatomic) AudioUnit audioUnit;
+@property (nonatomic) AudioBuffer workBuf;
 @property (nonatomic) CARingBuffer *histBuf;
 @property (nonatomic) UInt32 histBufMaxByteSize;
-@property (nonatomic) UInt32 histBufFrameNumber;
+@property (nonatomic) SInt64 histBufFrameNumber;
+@property (nonatomic) SInt64 histBufReadFrameNumber;
+@property (nonatomic) NSTimeInterval histBufTime;
 @property (readwrite) NSUInteger packetSize;
 
 @end
 
 static OSStatus OutputRenderCallback (void *inRefCon,
-                                      AudioUnitRenderActionFlags	* ioActionFlags,
+                                      AudioUnitRenderActionFlags * ioActionFlags,
                                       const AudioTimeStamp * inTimeStamp,
                                       UInt32 inOutputBusNumber,
                                       UInt32 inNumberFrames,
@@ -35,7 +35,15 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 {
     StreamPlayer *self = (__bridge StreamPlayer*)inRefCon;
     
-    self.histBuf->Fetch(ioData, inNumberFrames, self.histBufFrameNumber - inNumberFrames);
+    long long interval = [NSDate timeIntervalSinceReferenceDate] * 1000000 - self.histBufTime;
+    
+    if (interval > 1)
+    {
+        self.histBuf->Fetch(ioData, inNumberFrames, self.histBufReadFrameNumber);
+        
+        UInt32 frameSize = sizeof(UInt32) * self.workBuf.mNumberChannels;
+        self.histBufReadFrameNumber = self.histBufReadFrameNumber + (self.workBuf.mDataByteSize / frameSize);
+    }
 
     return noErr;
 }
@@ -63,6 +71,8 @@ static OSStatus OutputRenderCallback (void *inRefCon,
     _histBuf->Allocate(2, outputFormat.mBytesPerFrame, framesInHistoryBuffer);
     _histBufMaxByteSize = outputFormat.mBytesPerFrame * framesInHistoryBuffer;
     _histBufFrameNumber = 0;
+    _histBufReadFrameNumber = 0;
+    _histBufTime = 0;
     
     // create a component description
     AudioComponentDescription desc;
@@ -130,6 +140,9 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 - (void)play:(NSData *)data
 {
     memcpy(_workBuf.mData, [data bytes], [data length]);
+    
+    if (_histBufTime == 0)
+        _histBufTime = [NSDate timeIntervalSinceReferenceDate] * 1000000;
 
     AudioBufferList abl;
     abl.mBuffers[0] = _workBuf;
@@ -138,7 +151,7 @@ static OSStatus OutputRenderCallback (void *inRefCon,
     _histBuf->Store(&abl, (_workBuf.mDataByteSize / _workBuf.mNumberChannels) / sizeof(UInt32), _histBufFrameNumber);
     
     UInt32 frameSize = sizeof(UInt32) * _workBuf.mNumberChannels;
-    _histBufFrameNumber = ((_histBufFrameNumber + (_workBuf.mDataByteSize / frameSize)) % (_histBufMaxByteSize / frameSize));
+    _histBufFrameNumber = _histBufFrameNumber + (_workBuf.mDataByteSize / frameSize);
 }
 
 void CheckError(OSStatus error, const char *operation)
