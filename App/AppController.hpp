@@ -2,12 +2,17 @@
 #define __AppController_hpp__
 #include <Cocoa/Cocoa.h>
 #include "AudioTee.hpp"
+#include "GCDAsyncSocket.h"
+
 
 @interface
-AppController : NSObject {
+AppController : NSObject <GCDAsyncSocketDelegate> {
   NSStatusItem *mSbItem;
   NSMenu *mMenu;
   AudioTee *mEngine;
+  dispatch_queue_t mSocketQueue;
+  GCDAsyncSocket *mListenSocket;
+  NSMutableArray<GCDAsyncSocket *> *mConnectedSockets;
 }
 
 - (void)toggleRecord;

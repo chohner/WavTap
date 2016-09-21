@@ -1,0 +1,11 @@
+platform :ios, '8.4'
+use_frameworks!
+
+def shared_pods
+	pod 'CocoaAsyncSocket'
+	pod 'SwiftyUserDefaults'
+end
+
+target 'WavTapClient' do
+    shared_pods
+end

@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		799533321D80EFEB0097481B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799533311D80EFEB0097481B /* AppDelegate.swift */; };
+		799533341D80EFEB0097481B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799533331D80EFEB0097481B /* ViewController.swift */; };
+		799533371D80EFEB0097481B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799533351D80EFEB0097481B /* Main.storyboard */; };
+		799533391D80EFEB0097481B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799533381D80EFEB0097481B /* Assets.xcassets */; };
+		7995333C1D80EFEB0097481B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7995333A1D80EFEB0097481B /* LaunchScreen.storyboard */; };
+		799533561D8187200097481B /* StreamPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 799533551D8187200097481B /* StreamPlayer.mm */; };
+		7EE8DB0566EDD45FF4BB2838 /* Pods_WavTapClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5474EF5945BA42A4CDFF4E0C /* Pods_WavTapClient.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5474EF5945BA42A4CDFF4E0C /* Pods_WavTapClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WavTapClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		596BD66CF11F33231A44D826 /* Pods-WavTapClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WavTapClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WavTapClient/Pods-WavTapClient.debug.xcconfig"; sourceTree = "<group>"; };
+		7995332E1D80EFEB0097481B /* WavTap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WavTap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		799533311D80EFEB0097481B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		799533331D80EFEB0097481B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		799533361D80EFEB0097481B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		799533381D80EFEB0097481B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7995333B1D80EFEB0097481B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7995333D1D80EFEB0097481B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		799533541D8187200097481B /* StreamPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamPlayer.h; sourceTree = "<group>"; };
+		799533551D8187200097481B /* StreamPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StreamPlayer.mm; sourceTree = "<group>"; };
+		799533571D82D5EE0097481B /* WavTapClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WavTapClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		CB921F8FDF1088661D75F880 /* Pods-WavTapClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WavTapClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-WavTapClient/Pods-WavTapClient.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7995332B1D80EFEB0097481B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EE8DB0566EDD45FF4BB2838 /* Pods_WavTapClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		447C1455A070BA25D98B1C5B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5474EF5945BA42A4CDFF4E0C /* Pods_WavTapClient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FEE84B1E48C5AFEFD27A308 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				596BD66CF11F33231A44D826 /* Pods-WavTapClient.debug.xcconfig */,
+				CB921F8FDF1088661D75F880 /* Pods-WavTapClient.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		799533251D80EFEB0097481B = {
+			isa = PBXGroup;
+			children = (
+				799533301D80EFEB0097481B /* WavTapClient */,
+				7995332F1D80EFEB0097481B /* Products */,
+				5FEE84B1E48C5AFEFD27A308 /* Pods */,
+				447C1455A070BA25D98B1C5B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7995332F1D80EFEB0097481B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7995332E1D80EFEB0097481B /* WavTap.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		799533301D80EFEB0097481B /* WavTapClient */ = {
+			isa = PBXGroup;
+			children = (
+				799533571D82D5EE0097481B /* WavTapClient-Bridging-Header.h */,
+				799533311D80EFEB0097481B /* AppDelegate.swift */,
+				799533331D80EFEB0097481B /* ViewController.swift */,
+				799533541D8187200097481B /* StreamPlayer.h */,
+				799533551D8187200097481B /* StreamPlayer.mm */,
+				799533351D80EFEB0097481B /* Main.storyboard */,
+				799533381D80EFEB0097481B /* Assets.xcassets */,
+				7995333A1D80EFEB0097481B /* LaunchScreen.storyboard */,
+				7995333D1D80EFEB0097481B /* Info.plist */,
+			);
+			path = WavTapClient;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7995332D1D80EFEB0097481B /* WavTapClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 799533401D80EFEB0097481B /* Build configuration list for PBXNativeTarget "WavTapClient" */;
+			buildPhases = (
+				8D58C320CEA94F4E113FEE63 /* [CP] Check Pods Manifest.lock */,
+				7995332A1D80EFEB0097481B /* Sources */,
+				7995332B1D80EFEB0097481B /* Frameworks */,
+				7995332C1D80EFEB0097481B /* Resources */,
+				7CB4D1017744C08151B8CBAB /* [CP] Embed Pods Frameworks */,
+				E566F1DA295317D495441ABD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WavTapClient;
+			productName = WavTapClient;
+			productReference = 7995332E1D80EFEB0097481B /* WavTap.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		799533261D80EFEB0097481B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Koodinurk Ltd";
+				TargetAttributes = {
+					7995332D1D80EFEB0097481B = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 799533291D80EFEB0097481B /* Build configuration list for PBXProject "WavTapClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 799533251D80EFEB0097481B;
+			productRefGroup = 7995332F1D80EFEB0097481B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7995332D1D80EFEB0097481B /* WavTapClient */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7995332C1D80EFEB0097481B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7995333C1D80EFEB0097481B /* LaunchScreen.storyboard in Resources */,
+				799533391D80EFEB0097481B /* Assets.xcassets in Resources */,
+				799533371D80EFEB0097481B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7CB4D1017744C08151B8CBAB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WavTapClient/Pods-WavTapClient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D58C320CEA94F4E113FEE63 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E566F1DA295317D495441ABD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WavTapClient/Pods-WavTapClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7995332A1D80EFEB0097481B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				799533561D8187200097481B /* StreamPlayer.mm in Sources */,
+				799533341D80EFEB0097481B /* ViewController.swift in Sources */,
+				799533321D80EFEB0097481B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		799533351D80EFEB0097481B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				799533361D80EFEB0097481B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7995333A1D80EFEB0097481B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7995333B1D80EFEB0097481B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7995333E1D80EFEB0097481B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7995333F1D80EFEB0097481B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		799533411D80EFEB0097481B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 596BD66CF11F33231A44D826 /* Pods-WavTapClient.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = WavTapClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ee.koodinurk.WavTapClient;
+				PRODUCT_NAME = WavTap;
+				SWIFT_OBJC_BRIDGING_HEADER = "WavTapClient/WavTapClient-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		799533421D80EFEB0097481B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB921F8FDF1088661D75F880 /* Pods-WavTapClient.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = WavTapClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ee.koodinurk.WavTapClient;
+				PRODUCT_NAME = WavTap;
+				SWIFT_OBJC_BRIDGING_HEADER = "WavTapClient/WavTapClient-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		799533291D80EFEB0097481B /* Build configuration list for PBXProject "WavTapClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7995333E1D80EFEB0097481B /* Debug */,
+				7995333F1D80EFEB0097481B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		799533401D80EFEB0097481B /* Build configuration list for PBXNativeTarget "WavTapClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				799533411D80EFEB0097481B /* Debug */,
+				799533421D80EFEB0097481B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 799533261D80EFEB0097481B /* Project object */;
+}

@@ -2,3 +2,5 @@ xcuserdata
 *.xcworkspace
 build
 *.psd
+*.lock
+Client/Pods

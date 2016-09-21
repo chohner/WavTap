@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>appIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.wavtap.WavTap</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -30,5 +30,7 @@
 	<string>NSApplication</string>
 	<key>NSUIElement</key>
 	<integer>1</integer>
+  <key>WTBroadcastPort</key>
+  <integer>32905</integer>
 </dict>
 </plist>

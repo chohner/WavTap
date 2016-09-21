@@ -9,7 +9,16 @@
 #include "AudioDevice.hpp"
 #include "WavFileUtils.hpp"
 
-AudioTee::AudioTee(AudioDeviceID inputDeviceID, AudioDeviceID outputDeviceID) : mInputDevice(inputDeviceID, true), mOutputDevice(outputDeviceID, false), mSecondsInHistoryBuffer(20), mWorkBuf(NULL), mHistBuf(), mHistoryBufferMaxByteSize(0), mBufferSize(1024), mHistoryBufferByteSize(0), mHistoryBufferHeadOffsetFrameNumber(0) {
+AudioTee::AudioTee(AudioDeviceID inputDeviceID, AudioDeviceID outputDeviceID)
+: mInputDevice(inputDeviceID, true),
+mOutputDevice(outputDeviceID, false),
+mSecondsInHistoryBuffer(20),
+mWorkBuf(NULL), mHistBuf(),
+mHistoryBufferMaxByteSize(0),
+mBufferSize(1024),
+mHistoryBufferByteSize(0),
+mHistoryBufferHeadOffsetFrameNumber(0)
+{
   mInputDevice.SetBufferSize(mBufferSize);
   mOutputDevice.SetBufferSize(mBufferSize);
 }
@@ -66,6 +75,8 @@ OSStatus AudioTee::InputIOProc(AudioDeviceID inDevice, const AudioTimeStamp *inN
     }
     UInt32 frameSize = sizeof(UInt32) * inInputData->mBuffers[i].mNumberChannels;
     This->mHistoryBufferHeadOffsetFrameNumber = ((This->mHistoryBufferHeadOffsetFrameNumber + (inInputData->mBuffers[i].mDataByteSize / frameSize)) % (This->mHistoryBufferMaxByteSize / frameSize));
+    if (This->mCallback.is_set())
+      This->mCallback(This->mWorkBuf, inInputData->mBuffers[i].mDataByteSize);
   }
   return noErr;
 }

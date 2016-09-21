@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WavTap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQ2-56-yj7" userLabel="Container">
+                                <rect key="frame" x="200" y="120" width="200" height="360"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.1.153" placeholder="Host" textAlignment="center" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c24-wK-613">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="32905" placeholder="Port" textAlignment="center" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="v6p-Xy-CKU">
+                                        <rect key="frame" x="0.0" y="120" width="200" height="120"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8o-NK-aNO">
+                                        <rect key="frame" x="0.0" y="240" width="200" height="120"/>
+                                        <color key="backgroundColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Connect">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="connectClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rBy-T9-CgR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="c24-wK-613" firstAttribute="height" secondItem="v6p-Xy-CKU" secondAttribute="height" id="Abf-0C-PVs"/>
+                                    <constraint firstAttribute="trailing" secondItem="L8o-NK-aNO" secondAttribute="trailing" id="CAN-Kp-h3E"/>
+                                    <constraint firstItem="v6p-Xy-CKU" firstAttribute="top" secondItem="c24-wK-613" secondAttribute="bottom" id="FbG-dH-ljz"/>
+                                    <constraint firstItem="L8o-NK-aNO" firstAttribute="top" secondItem="v6p-Xy-CKU" secondAttribute="bottom" id="N8N-l5-UA1"/>
+                                    <constraint firstItem="L8o-NK-aNO" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="POv-yY-rAl"/>
+                                    <constraint firstItem="v6p-Xy-CKU" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="X5o-mc-6po"/>
+                                    <constraint firstItem="c24-wK-613" firstAttribute="top" secondItem="bQ2-56-yj7" secondAttribute="top" id="Zzg-9L-03S"/>
+                                    <constraint firstItem="v6p-Xy-CKU" firstAttribute="height" secondItem="L8o-NK-aNO" secondAttribute="height" id="jfj-OJ-GyX"/>
+                                    <constraint firstAttribute="trailing" secondItem="v6p-Xy-CKU" secondAttribute="trailing" id="lSz-VA-hAj"/>
+                                    <constraint firstItem="c24-wK-613" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="mFp-Ng-jNf"/>
+                                    <constraint firstAttribute="bottom" secondItem="L8o-NK-aNO" secondAttribute="bottom" id="yCM-hg-gUK"/>
+                                    <constraint firstAttribute="trailing" secondItem="c24-wK-613" secondAttribute="trailing" id="zpR-lc-qvm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bQ2-56-yj7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0pQ-nC-9xh"/>
+                            <constraint firstItem="bQ2-56-yj7" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="5Zw-kK-yuG"/>
+                            <constraint firstItem="bQ2-56-yj7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="W9j-ho-W3q"/>
+                            <constraint firstItem="bQ2-56-yj7" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="udP-GH-A2t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mConnectButton" destination="L8o-NK-aNO" id="ROX-X0-rIf"/>
+                        <outlet property="mHostTextField" destination="c24-wK-613" id="Hr0-wa-Tkz"/>
+                        <outlet property="mPortTextField" destination="v6p-Xy-CKU" id="e0P-8D-n3Q"/>
+                        <outletCollection property="mTouchViews" destination="v6p-Xy-CKU" collectionClass="NSMutableArray" id="QLE-ng-wOb"/>
+                        <outletCollection property="mTouchViews" destination="c24-wK-613" collectionClass="NSMutableArray" id="P4R-tc-Our"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

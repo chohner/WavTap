@@ -7,7 +7,7 @@
 #include <AudioUnit/AudioUnit.h>
 #include <QuartzCore/CoreImage.h>
 #include "AppController.hpp"
-#include "AudioTee.hpp"
+#include "ObjcCallback.hpp"
 
 @implementation AppController
 
@@ -22,6 +22,9 @@
   currentFrame = 0;
   totalFrames = 16;
   animTimer = NULL;
+  mSocketQueue = dispatch_queue_create("WavTap.Broadcast.SocketQueue", NULL);
+  mListenSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mSocketQueue];
+  mConnectedSockets = [[NSMutableArray alloc] initWithCapacity:1];
   return self;
 }
 
@@ -53,6 +56,7 @@
     if (0 == strcmp("WavTap", (*i).mName)) mWavTapDeviceID = (*i).mID;
   }
   [self initConnections];
+  [self initServer];
   [self bindHotKeys];
   [self initStatusBar];
   [self buildMenu];
@@ -126,6 +130,7 @@
   size = sizeof(mStashedVolume2);
   AudioObjectGetPropertyData(mStashedAudioDeviceID, &volCurrDef2Address, 0, NULL, &size, &mStashedVolume2);
   mEngine = new AudioTee(mWavTapDeviceID, mOutputDeviceID);
+  mEngine->mCallback = objc_callback<void(Byte*, UInt32)>(@selector(soundInputCallback:size:), self);
   AudioObjectPropertyAddress volSwapWav0Address = { kAudioDevicePropertyVolumeScalar, kAudioObjectPropertyScopeOutput, 0 };
   AudioObjectSetPropertyData(mWavTapDeviceID, &volSwapWav0Address, 0, NULL, sizeof(maxVolume), &maxVolume);
   AudioObjectPropertyAddress volSwapWav1Address = { kAudioDevicePropertyVolumeScalar, kAudioObjectPropertyScopeOutput, 1 };
@@ -134,6 +139,20 @@
   AudioObjectSetPropertyData(mWavTapDeviceID, &volSwapWav2Address, 0, NULL, sizeof(maxVolume), &maxVolume);
   mEngine->start();
   AudioObjectSetPropertyData(kAudioObjectSystemObject, &devCurrDefAddress, 0, NULL, sizeof(mWavTapDeviceID), &mWavTapDeviceID);
+}
+
+- (void)initServer {
+  int port = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"WTBroadcastPort"] integerValue];
+  if (port < 0 || port > 65535) port = 0;
+		
+  NSError *error = nil;
+  if(![mListenSocket acceptOnPort:port error:&error])
+  {
+    printf("Error starting server: %s\n", error.localizedDescription.UTF8String);
+    return;
+  }
+  
+  printf("WavTap broadcast server started on port %hu\n", [mListenSocket localPort]);
 }
 
 - (OSStatus)restoreSystemOutputDevice {
@@ -187,18 +206,20 @@ OSStatus historyRecordHotKeyHandler(EventHandlerCallRef nextHandler, EventRef an
   NSString *scriptExtension = @"sh";
   NSString *scriptAbsolutePath = [NSString stringWithFormat:@"%@/%@.%@", sharedSupportPath, scriptName, scriptExtension];
   NSTask *task=[[NSTask alloc] init];
-  NSArray *argv=[NSArray arrayWithObjects:nil];
+  NSArray *argv=[NSArray array];
   [task setArguments: argv];
   [task setLaunchPath:scriptAbsolutePath];
   [task launch];
 }
 
 - (void)startAnimatingStatusBarIcon {
+  if (animTimer) return;
   animTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/12.0 target:self selector:@selector(updateStatusBarIcon:) userInfo:nil repeats:YES];
 }
 
 - (void)stopAnimatingStatusBarIcon {
   [animTimer invalidate];
+  animTimer = NULL;
   currentFrame = 0;
   NSImage* image = [NSImage imageNamed:[NSString stringWithFormat:@"menuIcon%d", (currentFrame % totalFrames)]];
   [image setTemplate:YES];
@@ -257,6 +278,60 @@ OSStatus historyRecordHotKeyHandler(EventHandlerCallRef nextHandler, EventRef an
 - (void)doQuit {
   [self cleanupOnBeforeQuit];
   [NSApp terminate:nil];
+}
+
+@end
+
+@implementation AppController (GCDAsyncSocketDelegate)
+
+- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
+{
+  @synchronized(mConnectedSockets)
+  {
+    [mConnectedSockets addObject:newSocket];
+  }
+  
+  NSString *host = [newSocket connectedHost];
+  UInt16 port = [newSocket connectedPort];
+  
+  AudioStreamBasicDescription asbd = mEngine->mInputDevice.mFormat;
+  
+  [newSocket writeData:[NSData dataWithBytes:&asbd length:sizeof(asbd)] withTimeout:-1 tag:0];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    @autoreleasepool {
+      printf("Accepted client %s:%hu\n", host.UTF8String, port);
+    }
+  });
+}
+
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
+{
+  if (sock != mListenSocket)
+  {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        printf("Client Disconnected\n");
+    });
+    
+    @synchronized(mConnectedSockets)
+    {
+      [mConnectedSockets removeObject:sock];
+    }
+  }
+}
+
+@end
+
+@implementation AppController (AudioTree)
+
+- (void)soundInputCallback:(Byte*)buffer size:(UInt32)bufferSize
+{
+  if ([mConnectedSockets count] == 0) return;
+  
+  NSData *data = [NSData dataWithBytes:buffer length:bufferSize];
+  
+  for (GCDAsyncSocket* socket in mConnectedSockets)
+    [socket writeData:data withTimeout:-1 tag:1];
 }
 
 @end

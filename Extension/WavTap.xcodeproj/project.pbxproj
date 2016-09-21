@@ -66,9 +66,9 @@
 		247142CAFF3F8F9811CA285C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3EA7CAEB165F609A00BD5263 /* WavTapEngine.hpp */,
 				3EA7CAEA165F609A00BD5263 /* WavTapDevice.hpp */,
 				C93407660601317E002E6A19 /* WavTapDevice.cpp */,
+				3EA7CAEB165F609A00BD5263 /* WavTapEngine.hpp */,
 				C93407640601317E002E6A19 /* WavTapEngine.cpp */,
 			);
 			name = Source;

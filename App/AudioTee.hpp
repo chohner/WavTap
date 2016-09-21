@@ -1,6 +1,7 @@
 #ifndef __AudioTee_hpp__
 #define __AudioTee_hpp__
 #include "AudioDevice.hpp"
+#include "ObjcCallback.hpp"
 #include "CARingBuffer.h"
 
 class AudioTee {
@@ -13,6 +14,7 @@ public:
   AudioDevice mInputDevice;
   AudioDevice mOutputDevice;
   UInt32 mSecondsInHistoryBuffer;
+  objc_callback<void(Byte*, UInt32)> mCallback;
 protected:
   Byte *mWorkBuf;
   CARingBuffer *mHistBuf;
