@@ -1,6 +1,6 @@
 ## WavTap
 
-Capture whatever your mac is playing to a .wav file on your Desktop—as simply as a screenshot.
+Capture whatever your mac is playing to a .wav file on your Desktop—as simply as a screenshot or use iOS client to listen audio on local network. 
 
 ![](screenshot.png)
 
@@ -27,6 +27,10 @@ Once that's done, run the [installer](https://github.com/pje/WavTap/releases/dow
 #### Uninstallation
 
 `make uninstall` removes everything
+
+#### Broadcast
+
+Default port is defined in Info.plist as property WTBroadcastPort: 32905
 
 ##### Nerd Corner
 
