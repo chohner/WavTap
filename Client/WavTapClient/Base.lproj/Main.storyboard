@@ -44,16 +44,32 @@
                                             <action selector="connectClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rBy-T9-CgR"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVu-Oe-yvv">
+                                        <rect key="frame" x="0.0" y="240" width="200" height="120"/>
+                                        <color key="backgroundColor" red="0.59999999999999998" green="0.0" blue="0.071934700549999994" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Disconnect">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled" title="Connecting"/>
+                                        <connections>
+                                            <action selector="disconnectClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q2T-mX-JEC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="eVu-Oe-yvv" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="3aM-ec-fZ5"/>
+                                    <constraint firstItem="eVu-Oe-yvv" firstAttribute="top" secondItem="v6p-Xy-CKU" secondAttribute="bottom" id="57l-0s-KeY"/>
                                     <constraint firstItem="c24-wK-613" firstAttribute="height" secondItem="v6p-Xy-CKU" secondAttribute="height" id="Abf-0C-PVs"/>
                                     <constraint firstAttribute="trailing" secondItem="L8o-NK-aNO" secondAttribute="trailing" id="CAN-Kp-h3E"/>
                                     <constraint firstItem="v6p-Xy-CKU" firstAttribute="top" secondItem="c24-wK-613" secondAttribute="bottom" id="FbG-dH-ljz"/>
+                                    <constraint firstItem="eVu-Oe-yvv" firstAttribute="height" secondItem="v6p-Xy-CKU" secondAttribute="height" id="Iin-HM-Kd2"/>
                                     <constraint firstItem="L8o-NK-aNO" firstAttribute="top" secondItem="v6p-Xy-CKU" secondAttribute="bottom" id="N8N-l5-UA1"/>
                                     <constraint firstItem="L8o-NK-aNO" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="POv-yY-rAl"/>
                                     <constraint firstItem="v6p-Xy-CKU" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="X5o-mc-6po"/>
                                     <constraint firstItem="c24-wK-613" firstAttribute="top" secondItem="bQ2-56-yj7" secondAttribute="top" id="Zzg-9L-03S"/>
+                                    <constraint firstAttribute="trailing" secondItem="eVu-Oe-yvv" secondAttribute="trailing" id="bx3-F6-JHB"/>
+                                    <constraint firstAttribute="bottom" secondItem="eVu-Oe-yvv" secondAttribute="bottom" id="hYE-3A-FmY"/>
                                     <constraint firstItem="v6p-Xy-CKU" firstAttribute="height" secondItem="L8o-NK-aNO" secondAttribute="height" id="jfj-OJ-GyX"/>
                                     <constraint firstAttribute="trailing" secondItem="v6p-Xy-CKU" secondAttribute="trailing" id="lSz-VA-hAj"/>
                                     <constraint firstItem="c24-wK-613" firstAttribute="leading" secondItem="bQ2-56-yj7" secondAttribute="leading" id="mFp-Ng-jNf"/>
@@ -72,6 +88,7 @@
                     </view>
                     <connections>
                         <outlet property="mConnectButton" destination="L8o-NK-aNO" id="ROX-X0-rIf"/>
+                        <outlet property="mDisconnectButton" destination="eVu-Oe-yvv" id="PCA-kO-bpJ"/>
                         <outlet property="mHostTextField" destination="c24-wK-613" id="Hr0-wa-Tkz"/>
                         <outlet property="mPortTextField" destination="v6p-Xy-CKU" id="e0P-8D-n3Q"/>
                         <outletCollection property="mTouchViews" destination="v6p-Xy-CKU" collectionClass="NSMutableArray" id="QLE-ng-wOb"/>

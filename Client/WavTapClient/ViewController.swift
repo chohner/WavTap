@@ -29,6 +29,7 @@ class ViewController: UIViewController
     @IBOutlet weak var mHostTextField: UITextField!
     @IBOutlet weak var mPortTextField: UITextField!
     @IBOutlet weak var mConnectButton: UIButton!
+    @IBOutlet weak var mDisconnectButton: UIButton!
     
     @IBOutlet var mTouchViews: [UIControl]!
     
@@ -66,7 +67,6 @@ class ViewController: UIViewController
             view.enabled = false
         }
         
-        mConnectButton.setTitle("Connecting", forState: UIControlState.Normal)
         mConnectButton.enabled = false;
         
         if let host = mHostTextField.text, portString = mPortTextField.text, port = UInt16(portString) {
@@ -77,6 +77,11 @@ class ViewController: UIViewController
                 print("Failed to connect")
             }
         }
+    }
+    
+    @IBAction func disconnectClicked(sender: UIButton)
+    {
+        mAsyncSocket.disconnect();
     }
 }
 
@@ -89,8 +94,8 @@ extension ViewController: GCDAsyncSocketDelegate
         Defaults[.HostKey] = mHostTextField.text!
         Defaults[.PortKey] = mPortTextField.text!
         
-        mConnectButton.setTitle("Disconnect", forState: UIControlState.Normal)
-        mConnectButton.enabled = true;
+        mConnectButton.hidden = true;
+        mDisconnectButton.hidden = false;
     }
     
     func socketDidDisconnect(sock: GCDAsyncSocket!, withError err: NSError!)
@@ -106,8 +111,9 @@ extension ViewController: GCDAsyncSocketDelegate
             mStreamPlayer = nil;
         }
         
-        mConnectButton.setTitle("Connect", forState: UIControlState.Normal)
         mConnectButton.enabled = true;
+        mConnectButton.hidden = false;
+        mDisconnectButton.hidden = true;
     }
     
     func socket(sock: GCDAsyncSocket!, didReadData data: NSData!, withTag tag: Int)
