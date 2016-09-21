@@ -39,10 +39,9 @@ static OSStatus OutputRenderCallback (void *inRefCon,
     
     if (interval > 1)
     {
-        self.histBuf->Fetch(ioData, inNumberFrames, self.histBufReadFrameNumber);
+        self.histBuf->Fetch(ioData, inNumberFrames, self.histBufReadFrameNumber - inNumberFrames);
         
-        UInt32 frameSize = sizeof(UInt32) * self.workBuf.mNumberChannels;
-        self.histBufReadFrameNumber = self.histBufReadFrameNumber + (self.workBuf.mDataByteSize / frameSize);
+        self.histBufReadFrameNumber = self.histBufReadFrameNumber + inNumberFrames;
     }
 
     return noErr;
