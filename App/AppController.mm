@@ -286,8 +286,7 @@ OSStatus historyRecordHotKeyHandler(EventHandlerCallRef nextHandler, EventRef an
 
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
 {
-  @synchronized(mConnectedSockets)
-  {
+  @synchronized(mConnectedSockets) {
     [mConnectedSockets addObject:newSocket];
   }
   
@@ -313,8 +312,7 @@ OSStatus historyRecordHotKeyHandler(EventHandlerCallRef nextHandler, EventRef an
         printf("Client Disconnected\n");
     });
     
-    @synchronized(mConnectedSockets)
-    {
+    @synchronized(mConnectedSockets) {
       [mConnectedSockets removeObject:sock];
     }
   }
@@ -330,8 +328,10 @@ OSStatus historyRecordHotKeyHandler(EventHandlerCallRef nextHandler, EventRef an
   
   NSData *data = [NSData dataWithBytes:buffer length:bufferSize];
   
-  for (GCDAsyncSocket* socket in mConnectedSockets)
-    [socket writeData:data withTimeout:-1 tag:1];
+  @synchronized (mConnectedSockets) {
+    for (GCDAsyncSocket* socket in mConnectedSockets)
+      [socket writeData:data withTimeout:-1 tag:1];
+  }
 }
 
 @end

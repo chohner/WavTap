@@ -11,6 +11,8 @@
 #import "CARingBuffer.h"
 #import "CABitOperations.h"
 
+static long gStreamBufferDelay = 1000 * 100; // 1 / 1000 ms * 100
+
 @interface StreamPlayer()
 {
     BOOL _isPlaying;
@@ -35,7 +37,7 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 {
     StreamPlayer *self = (__bridge StreamPlayer*)inRefCon;
     
-    long long interval = [NSDate timeIntervalSinceReferenceDate] * 1000000 - self.histBufTime;
+    long long interval = [NSDate timeIntervalSinceReferenceDate] * gStreamBufferDelay - self.histBufTime;
     
     if (interval > 1)
     {
@@ -141,7 +143,7 @@ static OSStatus OutputRenderCallback (void *inRefCon,
     memcpy(_workBuf.mData, [data bytes], [data length]);
     
     if (_histBufTime == 0)
-        _histBufTime = [NSDate timeIntervalSinceReferenceDate] * 1000000;
+        _histBufTime = [NSDate timeIntervalSinceReferenceDate] * gStreamBufferDelay;
 
     AudioBufferList abl;
     abl.mBuffers[0] = _workBuf;
