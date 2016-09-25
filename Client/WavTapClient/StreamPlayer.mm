@@ -11,8 +11,6 @@
 #import "CARingBuffer.h"
 #import "CABitOperations.h"
 
-static long gStreamBufferDelay = 1000 * 100; // 1 / 1000 ms * 100
-
 @interface StreamPlayer()
 {
     BOOL _isPlaying;
@@ -21,8 +19,8 @@ static long gStreamBufferDelay = 1000 * 100; // 1 / 1000 ms * 100
 @property (nonatomic) AudioBuffer workBuf;
 @property (nonatomic) CARingBuffer *histBuf;
 @property (nonatomic) UInt32 histBufMaxByteSize;
-@property (nonatomic) SInt64 histBufFrameNumber;
-@property (nonatomic) SInt64 histBufReadFrameNumber;
+@property (nonatomic) UInt64 histBufFrameNumber;
+@property (nonatomic) UInt64 histBufReadFrameNumber;
 @property (nonatomic) NSTimeInterval histBufTime;
 @property (readwrite) NSUInteger packetSize;
 
@@ -37,14 +35,8 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 {
     StreamPlayer *self = (__bridge StreamPlayer*)inRefCon;
     
-    long long interval = [NSDate timeIntervalSinceReferenceDate] * gStreamBufferDelay - self.histBufTime;
-    
-    if (interval > 1)
-    {
-        self.histBuf->Fetch(ioData, inNumberFrames, self.histBufReadFrameNumber - inNumberFrames);
-        
-        self.histBufReadFrameNumber = self.histBufReadFrameNumber + inNumberFrames;
-    }
+    self.histBuf->Fetch(ioData, inNumberFrames, self.histBufReadFrameNumber - inNumberFrames);
+    self.histBufReadFrameNumber = self.histBufReadFrameNumber + inNumberFrames;
 
     return noErr;
 }
@@ -142,16 +134,13 @@ static OSStatus OutputRenderCallback (void *inRefCon,
 {
     memcpy(_workBuf.mData, [data bytes], [data length]);
     
-    if (_histBufTime == 0)
-        _histBufTime = [NSDate timeIntervalSinceReferenceDate] * gStreamBufferDelay;
-
-    AudioBufferList abl;
+    static AudioBufferList abl;
     abl.mBuffers[0] = _workBuf;
     abl.mNumberBuffers = 1;
     
     _histBuf->Store(&abl, (_workBuf.mDataByteSize / _workBuf.mNumberChannels) / sizeof(UInt32), _histBufFrameNumber);
     
-    UInt32 frameSize = sizeof(UInt32) * _workBuf.mNumberChannels;
+    static UInt32 frameSize = sizeof(UInt32) * _workBuf.mNumberChannels;
     _histBufFrameNumber = _histBufFrameNumber + (_workBuf.mDataByteSize / frameSize);
 }
 

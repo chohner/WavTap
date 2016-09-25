@@ -39,8 +39,7 @@ sudo make install
 
 #### Broadcast
 
-Default port is defined in Info.plist as property WTBroadcastPort: 32905
-Stream quality varies on CPU load, some packets may be sent late. Raw PCM bytes are brodcasted with no remarkable delay. 
+Default port is defined in Info.plist as property WTBroadcastPort: 32905. Stream quality varies on CPU load, some packets may be sent late. Raw PCM bytes are brodcasted with no remarkable delay. 
 
 ##### Nerd Corner
 

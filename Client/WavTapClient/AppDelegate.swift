@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
         
-        application.beginReceivingRemoteControlEvents()
+        //application.beginReceivingRemoteControlEvents()
         
         return true
     }
