@@ -4,3 +4,6 @@ build
 *.psd
 *.lock
 Client/Pods
+Client/iOS/Pods
+Client/Android/.idea
+Client/Android/gradle

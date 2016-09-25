@@ -22,7 +22,6 @@
 @property (nonatomic) UInt64 histBufFrameNumber;
 @property (nonatomic) UInt64 histBufReadFrameNumber;
 @property (nonatomic) NSTimeInterval histBufTime;
-@property (readwrite) NSUInteger packetSize;
 
 @end
 
