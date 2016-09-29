@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">WavTap</string>
-    <string name="action_settings">Settings</string>
+    <string name="LABEL_PLEASE_ENTER_HOST">Enter host</string>
+    <string name="LABEL_PLEASE_ENTER_PORT">Enter port</string>
+    <string name="BUTTON_CONNECT">Connect</string>
+    <string name="BUTTON_DISCONNECT">Disconnect</string>
+    <string name="ERROR_SRV_CREDS_MISSING">Host or port missing, please fill the fields!</string>
 </resources>
