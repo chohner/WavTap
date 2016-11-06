@@ -15,7 +15,7 @@ extension DefaultsKeys {
     static let PortKey = DefaultsKey<String>("portKey")
 }
 
-class ViewController: UIViewController
+class ViewController: BaseViewController
 {
     var mAsyncSocket: GCDAsyncSocket!
     var mStreamPlayer: StreamPlayer!
@@ -50,16 +50,18 @@ class ViewController: UIViewController
         super.didReceiveMemoryWarning()
     }
     
+    override func resignFirstResponders()
+    {
+        mHostTextField.resignFirstResponder()
+        mPortTextField.resignFirstResponder()
+    }
+    
     // MARK:
     // MARK: Action methods
     
     @IBAction func connectClicked(_ sender: UIButton)
     {
-        for view in mTouchViews {
-            view.isEnabled = false
-        }
-        
-        mConnectButton.isEnabled = false;
+        self.lock(ui: true)
         
         if let host = mHostTextField.text, let portString = mPortTextField.text, let port = UInt16(portString) {
             do {
@@ -67,6 +69,7 @@ class ViewController: UIViewController
                 mAsyncSocket.readData(toLength: UInt(MemoryLayout<AudioStreamBasicDescription>.size), withTimeout: -1, tag: 0)
             } catch {
                 print("Failed to connect")
+                self.lock(ui: false)
             }
         }
     }
@@ -74,6 +77,15 @@ class ViewController: UIViewController
     @IBAction func disconnectClicked(_ sender: UIButton)
     {
         mAsyncSocket.disconnect();
+    }
+    
+    fileprivate func lock(ui lock: Bool)
+    {
+        for view in mTouchViews {
+            view.isEnabled = !lock
+        }
+        
+        mConnectButton.isEnabled = !lock;
     }
 }
 
@@ -93,6 +105,9 @@ extension ViewController: GCDAsyncSocketDelegate
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?)
     {
         print("socketDidDisconnect")
+        if let err = err {
+            print(err.localizedDescription)
+        }
         
         for view in mTouchViews {
             view.isEnabled = true

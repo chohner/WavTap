@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina5_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,29 +21,29 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="WF4-7A-uvG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQ2-56-yj7" userLabel="Container">
-                                <rect key="frame" x="-161" y="147.33333333333337" width="736" height="441.33333333333326"/>
+                                <rect key="frame" x="161" y="82.666666666666686" width="414" height="248.66666666666663"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.1.153" placeholder="Host" textAlignment="center" minimumFontSize="17" background="input" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c24-wK-613">
-                                        <rect key="frame" x="0.0" y="0.0" width="736" height="146.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="82.666666666666671"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="32905" placeholder="Port" textAlignment="center" minimumFontSize="17" background="input" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="v6p-Xy-CKU">
-                                        <rect key="frame" x="0.0" y="146.99999999999997" width="736" height="147.3333333333334"/>
+                                        <rect key="frame" x="0.0" y="82.666666666666671" width="414" height="83.333333333333329"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8o-NK-aNO">
-                                        <rect key="frame" x="0.0" y="294.33333333333337" width="736" height="147.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="166" width="414" height="83.000000000000028"/>
                                         <state key="normal" title="Connect" backgroundImage="btn-connect">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -52,7 +52,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVu-Oe-yvv">
-                                        <rect key="frame" x="0.0" y="294.33333333333337" width="736" height="146.99999999999994"/>
+                                        <rect key="frame" x="0.0" y="166" width="414" height="82.666666666666657"/>
                                         <state key="normal" title="Disconnect" backgroundImage="btn-disconnect">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>

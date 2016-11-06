@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		793751931DCEB8EC00E2F886 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793751921DCEB8EC00E2F886 /* BaseViewController.swift */; };
 		799533321D80EFEB0097481B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799533311D80EFEB0097481B /* AppDelegate.swift */; };
 		799533341D80EFEB0097481B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799533331D80EFEB0097481B /* ViewController.swift */; };
 		799533371D80EFEB0097481B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799533351D80EFEB0097481B /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		5474EF5945BA42A4CDFF4E0C /* Pods_WavTapClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WavTapClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		596BD66CF11F33231A44D826 /* Pods-WavTapClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WavTapClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WavTapClient/Pods-WavTapClient.debug.xcconfig"; sourceTree = "<group>"; };
+		793751921DCEB8EC00E2F886 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7995332E1D80EFEB0097481B /* WavTap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WavTap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		799533311D80EFEB0097481B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		799533331D80EFEB0097481B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				79E112E61D9315B600AEDF06 /* CoreAudio */,
 				799533571D82D5EE0097481B /* WavTapClient-Bridging-Header.h */,
 				799533311D80EFEB0097481B /* AppDelegate.swift */,
+				793751921DCEB8EC00E2F886 /* BaseViewController.swift */,
 				799533331D80EFEB0097481B /* ViewController.swift */,
 				799533541D8187200097481B /* StreamPlayer.h */,
 				799533551D8187200097481B /* StreamPlayer.mm */,
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793751931DCEB8EC00E2F886 /* BaseViewController.swift in Sources */,
 				799533561D8187200097481B /* StreamPlayer.mm in Sources */,
 				799533341D80EFEB0097481B /* ViewController.swift in Sources */,
 				799533321D80EFEB0097481B /* AppDelegate.swift in Sources */,
