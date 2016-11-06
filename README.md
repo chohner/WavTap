@@ -8,8 +8,6 @@ Capture whatever your mac is playing to a .wav file on your Desktop—as simply 
 
 #### Installation
 
-##### El Capitan 
-
 **Turning Off Rootless System Integrity Protection in OS X El Capitan 10.11 +** due to Apple's [System Integrity Protection] (https://en.wikipedia.org/wiki/System_Integrity_Protection). 
 
 1. Reboot the Mac and hold down Command + R keys simultaneously after you hear the startup chime, this will boot OS X into Recovery Mode
@@ -18,9 +16,7 @@ Capture whatever your mac is playing to a .wav file on your Desktop—as simply 
 4. You’ll see a message saying that System Integrity Protection has been disabled and the Mac needs to restart for changes to take effect, and the Mac will then reboot itself automatically, just let it boot up as normal
 
 
-##### Yosemite
-
-As of Yosemite, Apple bans drivers that haven't received explicit approval from Apple. The only workaround I'm aware of is to set a system flag to [globally allow **all** unsigned kernel extensions](http://apple.stackexchange.com/questions/163059/how-can-i-disable-kext-signing-in-mac-os-x-10-10-yosemite). This means WavTap *will not work* unless you've enabled `kext-dev-mode`, using something like this:
+**As of Yosemite, Apple bans drivers that haven't received explicit approval from Apple. The only workaround I'm aware of is to set a system flag to [globally allow **all** unsigned kernel extensions](http://apple.stackexchange.com/questions/163059/how-can-i-disable-kext-signing-in-mac-os-x-10-10-yosemite). This means WavTap *will not work* unless you've enabled `kext-dev-mode`, using something like this:
 
 `
 sudo nvram boot-args=kext-dev-mode=1

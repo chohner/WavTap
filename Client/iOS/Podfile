@@ -1,4 +1,4 @@
-platform :ios, '8.4'
+platform :ios, '10'
 use_frameworks!
 
 def shared_pods

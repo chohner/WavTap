@@ -39,7 +39,7 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
         
-        mAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue:dispatch_get_main_queue())
+        mAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue:DispatchQueue.main)
         
         mHostTextField.text = Defaults[.HostKey]
         mPortTextField.text = Defaults.hasKey(.PortKey) ? Defaults[.PortKey] : "32905"
@@ -53,25 +53,25 @@ class ViewController: UIViewController
     // MARK:
     // MARK: Action methods
     
-    @IBAction func connectClicked(sender: UIButton)
+    @IBAction func connectClicked(_ sender: UIButton)
     {
         for view in mTouchViews {
-            view.enabled = false
+            view.isEnabled = false
         }
         
-        mConnectButton.enabled = false;
+        mConnectButton.isEnabled = false;
         
-        if let host = mHostTextField.text, portString = mPortTextField.text, port = UInt16(portString) {
+        if let host = mHostTextField.text, let portString = mPortTextField.text, let port = UInt16(portString) {
             do {
-                try mAsyncSocket!.connectToHost(host, onPort: port, withTimeout: TimeOut)
-                mAsyncSocket.readDataToLength(UInt(sizeof(AudioStreamBasicDescription)), withTimeout: -1, tag: 0)
+                try mAsyncSocket!.connect(toHost: host, onPort: port, withTimeout: TimeOut)
+                mAsyncSocket.readData(toLength: UInt(MemoryLayout<AudioStreamBasicDescription>.size), withTimeout: -1, tag: 0)
             } catch {
                 print("Failed to connect")
             }
         }
     }
     
-    @IBAction func disconnectClicked(sender: UIButton)
+    @IBAction func disconnectClicked(_ sender: UIButton)
     {
         mAsyncSocket.disconnect();
     }
@@ -79,23 +79,23 @@ class ViewController: UIViewController
 
 extension ViewController: GCDAsyncSocketDelegate
 {
-    func socket(socket : GCDAsyncSocket, didConnectToHost host:String, port p:UInt16)
+    func socket(_ socket : GCDAsyncSocket, didConnectToHost host:String, port p:UInt16)
     {
         print("didConnectToHost")
 
         Defaults[.HostKey] = mHostTextField.text!
         Defaults[.PortKey] = mPortTextField.text!
         
-        mConnectButton.hidden = true;
-        mDisconnectButton.hidden = false;
+        mConnectButton.isHidden = true;
+        mDisconnectButton.isHidden = false;
     }
     
-    func socketDidDisconnect(sock: GCDAsyncSocket!, withError err: NSError!)
+    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?)
     {
         print("socketDidDisconnect")
         
         for view in mTouchViews {
-            view.enabled = true
+            view.isEnabled = true
         }
                 
         if mStreamPlayer != nil {
@@ -103,17 +103,18 @@ extension ViewController: GCDAsyncSocketDelegate
             mStreamPlayer = nil;
         }
         
-        mConnectButton.enabled = true;
-        mConnectButton.hidden = false;
-        mDisconnectButton.hidden = true;
+        mConnectButton.isEnabled = true;
+        mConnectButton.isHidden = false;
+        mDisconnectButton.isHidden = true;
     }
     
-    func socket(sock: GCDAsyncSocket!, didReadData data: NSData!, withTag tag: Int)
+    func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int)
     {
         if tag == 0 {
 
             var asbd:AudioStreamBasicDescription = AudioStreamBasicDescription();
-            data.getBytes(&asbd, length: sizeof(AudioStreamBasicDescription))
+            
+            memcpy(&asbd, (data as NSData).bytes, MemoryLayout<AudioStreamBasicDescription>.size)
             
             mStreamPlayer = StreamPlayer.init(outputFormat: asbd);
             mStreamPlayer.startStream()
@@ -123,6 +124,6 @@ extension ViewController: GCDAsyncSocketDelegate
             mStreamPlayer.play(data);
         }
         
-        mAsyncSocket.readDataToLength(mStreamPlayer.packetSize, withTimeout: -1, tag: 1)
+        mAsyncSocket.readData(toLength: mStreamPlayer.packetSize, withTimeout: -1, tag: 1)
     }
 }
